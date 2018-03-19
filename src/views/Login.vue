@@ -60,7 +60,7 @@
             this.logining = true;
             //NProgress.start();
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-            
+            console.log('Vue.config.apiUrl', Vue.config.apiUrl)
             axios.post(Vue.config.apiUrl + '/admin/login', loginParams)
             .then((response) => {
                 this.logining = false;
