@@ -310,6 +310,19 @@
 			},
 			createProduct() {
 				this.addFormVisible = true;
+				this._id = null;
+				this.form = {
+					content    : '',
+					product_no : '',
+					order      : 10,
+					item       : [{
+						name  : '',
+						desc  : '',
+						img   : '',
+						price : 0,
+						order : 10
+					}]
+				};
 			}
 		},
 		mounted() {
