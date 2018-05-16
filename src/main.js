@@ -25,7 +25,7 @@ Vue.use(Vuex)
 //NProgress.configure({ showSpinner: false });
 console.log('__ENV__', process.env.NODE_ENV)
 if(process.env.NODE_ENV === 'production') {
-    Vue.config.apiUrl = 'http://testserver.eatisco.com';
+    Vue.config.apiUrl = 'http://filtration.hansgrohe.com.cn/server';
     Vue.config.uploadUrl = "http://106.14.94.210:8082/upload";
 } else {
     Vue.config.apiUrl = 'http://filtration.hansgrohe.com.cn/server';
