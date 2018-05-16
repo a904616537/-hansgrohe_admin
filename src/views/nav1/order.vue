@@ -7,7 +7,7 @@
 					<el-button @click="getOrder">Refresh List</el-button>
 				</el-form-item>
 				<el-form-item>
-					<!-- <el-button type="primary" v-on:click="createProduct">Create Product</el-button> -->
+					<el-button @click="onDownload">Download Excel</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
@@ -188,6 +188,23 @@
 						message : 'Failure'
 					});
 				})
+			},
+			onDownload() {
+				fetch(Vue.config.apiUrl + '/order/excel',{
+				method  : 'get',
+					headers : {
+						'Content-Type' : 'application/x-www-form-urlencoded',
+						'token'        : this.token
+					}
+				})
+				.then(response => response.json())
+				.then(result => {
+					console.log('result', result)
+					self.location=Vue.config.apiUrl + '/upload/Replacement_order.xlsx';
+				})
+				.catch(err => {
+					console.log('err', err)
+				});
 			},
 			handleRemove(file, fileList) {
 				this.fileList = fileList;
