@@ -16,7 +16,7 @@
 					{{user.username}}
 					</span>
 					<el-dropdown-menu slot="dropdown">
-						<el-dropdown-item divided @click.native="logout">Login</el-dropdown-item>
+						<el-dropdown-item divided @click.native="logout">Logout</el-dropdown-item>
 					</el-dropdown-menu>
 				</el-dropdown>
 			</el-col>

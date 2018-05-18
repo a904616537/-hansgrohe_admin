@@ -45,6 +45,7 @@
 			<el-table-column prop="person.name" label="Person" width="150" sortable/>
 			<el-table-column prop="phone" label="Phone" width="150"/>
 			<el-table-column prop="person.postcode" label="Post Code" width="120" />
+			<el-table-column prop="subdealer" label="Sub-dealer code" width="150" />
 			
 			<el-table-column label="Address" min-width="180">
 				<template scope ="scope">
