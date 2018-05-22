@@ -33,7 +33,7 @@
 						<el-table-column label="Replacement Date">
 							<template scope ="scope">
 								<div class="grid-content bg-purple">
-									<span>{{ moment(scope.row.setdate) }}</span>
+									<span>{{ setmoment(scope.row.setdate, scope.row.life) }}</span>
 								</div>
 							</template>
 						</el-table-column>
@@ -46,6 +46,13 @@
 			<el-table-column prop="phone" label="Phone" width="150"/>
 			<el-table-column prop="person.postcode" label="Post Code" width="120" />
 			<el-table-column prop="subdealer" label="Sub-dealer code" width="150" />
+			<el-table-column prop="setdate" label="Expiration Date" sortable :formatter="formatter">
+				<template scope ="scope">
+					<div class="grid-content bg-purple">
+						<span>{{ setmoment(scope.row.setdate, scope.row.life) }}</span>
+					</div>
+				</template>
+			</el-table-column>
 			
 			<el-table-column label="Address" min-width="180">
 				<template scope ="scope">
@@ -96,8 +103,14 @@
 				this.page = val;
 				this.getUsers();
 			},
+			formatter(row, column) {
+				return moment(row.setdate).add(row.life, 'months').format('YYYY-MM-DD');
+			},
 			moment(date) {
-				return moment().format('YYYY-MM-DD  h:mm:ss a');
+				return moment(date).format('YYYY-MM-DD  h:mm:ss a');
+			},
+			setmoment(date, months) {
+				return moment(date).add(months, 'months').format('YYYY-MM-DD');
 			},
 			getRegistered() {
 				this.listLoading = true;

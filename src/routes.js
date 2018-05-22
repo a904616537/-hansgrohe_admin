@@ -55,11 +55,11 @@ let routes = [
     },{
         path      : '/',
         component : Home,
-        name      : 'BuyProduct',
+        name      : '产品注册',
         iconCls   : 'fa fa-legal',
         leaf      : true,
         children: [
-            { path: '/buyproduct', component: BuyProduct, name: 'Buyproduct' },
+            { path: '/buyproduct', component: BuyProduct, name: '产品注册' },
         ]
     },{
         path      : '/',
