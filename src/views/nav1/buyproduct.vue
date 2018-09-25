@@ -37,6 +37,11 @@
 								</div>
 							</template>
 						</el-table-column>
+						<el-table-column label="Action" width="150">
+							<template scope="scope">
+								<el-button type="danger" style="margin: 3px auto;" size="small" @click="handleDel(props.$index, props.row)">Delete</el-button>
+							</template>
+						</el-table-column>
 					</el-table>
 
 				</template>
@@ -87,12 +92,12 @@
 		data() {
 			return {
 				filters     : {},
-				buyproduct       : [],
+				buyproduct  : [],
 				total       : 0,
 				page        : 1,
 				sels        : [],//列表选中列
 				listLoading : false,
-				addLoading: false,
+				addLoading  : false,
 			}
 		},
 		computed : mapState({
@@ -111,6 +116,33 @@
 			},
 			setmoment(date, months) {
 				return moment(date).add(months, 'months').format('YYYY-MM-DD');
+			},
+			handleDel(index, row) {
+				this.loading = true;
+				const body = querystring.stringify({_id : row._id});
+				fetch(Vue.config.apiUrl + '/buyproduct',{
+			        method : 'delete',
+			        headers : {
+			          'Content-Type' : 'application/x-www-form-urlencoded'
+			        },
+			        body : body
+				})
+				.then(result => {
+					this.$message({
+						type    : 'success',
+						message : 'Success'
+					});
+					this.loading = false;
+					this.buyproduct.splice(index, 1);
+				})
+				.catch(err => {
+					console.log('err', err)
+					this.loading = false;
+					this.$message({
+						type    : 'error',
+						message : 'Failure'
+					});
+				})
 			},
 			getRegistered() {
 				this.listLoading = true;

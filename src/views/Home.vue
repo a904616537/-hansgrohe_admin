@@ -95,7 +95,7 @@
 			}
 		},
 		computed : mapState({
-			user : state => JSON.parse(state.User.user)
+			user : state => state.User.user
 		}),
 		methods: {
 			onSubmit() {
@@ -134,7 +134,7 @@
 		mounted() {
 			var user = sessionStorage.getItem('user');
 			if (user) {
-				user = JSON.parse(user);
+				if(typeof user == 'string') user = JSON.parse(user);
 				this.sysUserName = user.name || '';
 				this.sysUserAvatar = user.avatar || '';
 			}
