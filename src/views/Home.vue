@@ -13,7 +13,7 @@
 				<el-dropdown trigger="hover">
 					<span class="el-dropdown-link userinfo-inner">
 					<!-- <img :src="this.sysUserAvatar" /> -->
-					{{user.username}}
+					{{user?user.username:''}}
 					</span>
 					<el-dropdown-menu slot="dropdown">
 						<el-dropdown-item divided @click.native="logout">Logout</el-dropdown-item>

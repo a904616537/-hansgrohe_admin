@@ -10,7 +10,7 @@
 		</el-col>
 
 		<!--列表-->
-		<el-table :data="buyproduct" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+		<el-table :data="buyproduct" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;" @sort-change="onSort">
 			<el-table-column type="index" width="60">
 			</el-table-column>
 			<el-table-column type="expand" label="Details">
@@ -51,7 +51,7 @@
 			<el-table-column prop="phone" label="Phone" width="150"/>
 			<el-table-column prop="person.postcode" label="Post Code" width="120" />
 			<el-table-column prop="subdealer" label="Sub-dealer code" width="150" />
-			<el-table-column prop="setdate" label="Expiration Date" sortable :formatter="formatter">
+			<el-table-column prop="setdate" label="Expiration Date" sortable :sort-method="onSorts" :formatter="formatter">
 				<template scope ="scope">
 					<div class="grid-content bg-purple">
 						<span>{{ setmoment(scope.row.setdate, scope.row.life) }}</span>
@@ -116,6 +116,23 @@
 			},
 			setmoment(date, months) {
 				return moment(date).add(months, 'months').format('YYYY-MM-DD');
+			},
+			onSorts(a, b) {
+				return moment(a.setdate).add(a.life, 'months').isBefore(moment(b.setdate).add(b.life, 'months'));
+			},
+			onSort({column, prop, order}) {
+				// 倒序
+				if(order == 'descending') {
+					this.buyproduct = this.buyproduct.sort((a, b) => {
+						if(prop == 'setdate') return moment(a[prop]).add(a.life, 'months').isBefore(moment(b[prop]).add(b.life, 'months'));
+						else return a[prop] > b[prop];
+					})
+				} else {
+					this.buyproduct = this.buyproduct.sort((a, b) => {
+						if(prop == 'setdate') return moment(b[prop]).add(b.life, 'months').isBefore(moment(a[prop]).add(a.life, 'months'));
+						else return b[prop] > a[prop];
+					})
+				}
 			},
 			handleDel(index, row) {
 				this.loading = true;
