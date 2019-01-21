@@ -24,6 +24,7 @@
 						<el-table :data="props.row.order_item" highlight-current-row v-loading="listLoading" style="width: 100%;">
 							<el-table-column type="index" width="60">
 							</el-table-column>
+							<el-table-column prop="no" label="No"/>
 							<el-table-column prop="name" label="Name" sortable/>
 							<el-table-column prop="number" label="Number" width="200" sortable/>
 							
@@ -59,6 +60,7 @@
 						</el-popover>
 					</template>
 				</el-table-column>
+				<el-table-column prop="message" label="Note"></el-table-column>
 				<el-table-column prop="total" label="Purchase Total" width="180" sortable>
 					<template scope="scope">
 						<p>¥ {{scope.row.total}}</p>
